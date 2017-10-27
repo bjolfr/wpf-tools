@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:fw="http://schemas.contentadorners/framework"
+                    xmlns:res="clr-namespace:ContentAdorners.Properties">
+
+    <Geometry x:Key="icon-warning">M1024 161v190q0 14 -9.5 23.5t-22.5 9.5h-192q-13 0 -22.5 -9.5t-9.5 -23.5v-190q0 -14 9.5 -23.5t22.5 -9.5h192q13 0 22.5 9.5t9.5 23.5zM1022 535l18 459q0 12 -10 19q-13 11 -24 11h-220q-11 0 -24 -11q-10 -7 -10 -21l17 -457q0 -10 10 -16.5t24 -6.5h185q14 0 23.5 6.5t10.5 16.5zM1008 1469l768 -1408q35 -63 -2 -126q-17 -29 -46.5 -46t-63.5 -17h-1536q-34 0 -63.5 17t-46.5 46q-37 63 -2 126l768 1408q17 31 47 49t65 18t65 -18t47 -49z</Geometry>
+
+    <DataTemplate x:Key="LimitedTextBoxWarning">
+        <Border Margin="0,2,2,0"
+                Background="{DynamicResource ControlBackground}"
+                HorizontalAlignment="Right" VerticalAlignment="Top"
+                ToolTip="{Binding TemplatedParent.DataContext, RelativeSource={RelativeSource TemplatedParent}}">
+            <Path Data="{StaticResource icon-warning}">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <RotateTransform Angle="180"/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+                <Path.Style>
+                    <Style TargetType="{x:Type Path}">
+                        <Setter Property="Height" Value="16"/>
+                        <Setter Property="Width" Value="16"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Stretch" Value="Uniform"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                        <Setter Property="Fill" Value="OrangeRed"/>
+                    </Style>
+                </Path.Style>
+            </Path>
+        </Border>
+    </DataTemplate>
+
+    <Style x:Key="LimitedTextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="MaxLength" Value="200"/>
+        <Setter Property="MaxLines" Value="4"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="fw:TextBoxLimitedInputBehavior.WarningTemplate" Value="{StaticResource LimitedTextBoxWarning}"/>
+        <Setter Property="fw:TextBoxLimitedInputBehavior.WarningMessage" Value="{x:Static res:Resources.MSG_TEXT_LIMITS}"/>
+        <Setter Property="fw:TextBoxLimitedInputBehavior.MaxLineLength" Value="50"/>
+    </Style>
+
+</ResourceDictionary>
